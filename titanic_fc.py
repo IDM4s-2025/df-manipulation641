@@ -22,6 +22,7 @@ def get_passenger_id(name):
     row = titanic.loc[titanic['Name'].str.lower() == name.lower(), 'PassengerId']
     if not row.empty:
         return row.values[0]
+        print("Passenger ID:", get_passenger_id(passenger_name))
     else:
         return "Passenger Name not found"
 
@@ -30,7 +31,7 @@ passenger_name = input("Enter Passenger Name: ").strip()
 print("Passenger ID:", get_passenger_id(passenger_name))
 
 #3
-def get_passenger_id(name):
+def get_passenger_idf(name):
     """
     Returns the PassengerId of a passenger given their Name.
     """
