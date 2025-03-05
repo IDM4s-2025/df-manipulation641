@@ -1,12 +1,15 @@
+
 import pandas as pd
-
 # Ejercicio 1
+def id_to_name(df: pd.DataFrame, id: int) -> str:
+    name = df.loc[id, ['Name']]
+    return name
 
-def name_to_id(df: pd.DataFrame, name: str) -> int:
-    id: int = df[df.Name == name].PassengerId.iat[0].item()
+#Ejercicio 2
+def name_a_id(df: pd.DataFrame, name: str) -> int:
+    id = df[df['Name'] == name].index[0]
     return id
 
-# Ejercicio 2
-def id_to_name(df: pd.DataFrame, id: int) -> str:
-    name: str = df[df.PassengerId == id]['Name'].iat[0]
-    return name
+def name_to_id(df: pd.DataFrame, name: str) -> int:
+    ids = df[df['Name'] == name].index
+    return ids[0]
