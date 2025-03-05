@@ -168,6 +168,3 @@ cython_debug/
 #.idea/
 
 # PyPI configuration file
-.pypirc
-
-/DATA
