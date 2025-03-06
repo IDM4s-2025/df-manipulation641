@@ -25,3 +25,15 @@ def name_to_id(df: pd.DataFrame, name: str) -> int:
     """
     id = df.loc[df['Name'] == name]['PassengerId']
     return int(id.values[0])
+
+def porcentaje_supervivencia(var):
+    """Regresa el porcentaje de supervivencia de los pasajeros
+
+    Args:
+        var (_type_): Conjunto de datos especifico
+
+    Returns:
+        _type_: Porcentaje de supervivencia de ese conjunto de datos
+    """
+    porcentaje = round(var['Survived'].mean() * 100, 2)
+    return porcentaje
