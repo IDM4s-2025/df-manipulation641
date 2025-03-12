@@ -1,3 +1,5 @@
+import pandas as pd 
+
 def id_to_name(df:pd.DataFrame,id: int) -> str: #name of argument:pd.DataFrame
     passenger_name = df[df.PassengerId == id].Name
     return passenger_name[id-1]
@@ -17,3 +19,6 @@ def messages_name(df:pd.DataFrame, id:int)-> str:
 def print_info(df:pd.DataFrame)->pd.DataFrame:
     passenger_info = df[df.Age == df.Age.max()]
     return print(passenger_info)
+
+def percentage_survivor(df:pd.DataFrame, subset:str):
+    return f'{df[df[subset]==1].shape[0] / df.shape[0] * 100} %'
