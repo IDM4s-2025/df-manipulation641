@@ -71,3 +71,19 @@ def print_all_info(df: pd.DataFrame) -> pd.DataFrame:
     """
     passenger = df[df.Age == df.Age.max()]
     return print(passenger)
+
+
+def percentage(subset:pd.Series, survived: pd.Series)-> float:
+    """Regresa el porcentaje de un subset
+
+    Args:
+        subset (pd.DataFrame): subset
+        suevived (pd.DataFrame): bool si sobrevivieron o no.
+
+    Returns:
+        int: Porcentaje
+    """
+    size_df = len(subset)
+    size_survived = len(survived)
+    return (size_survived/size_df)*100
+
