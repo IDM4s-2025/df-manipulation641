@@ -29,3 +29,22 @@ def name_to_id(df: pd.DataFrame, name: str) -> int:
 def oldest_passenger(df: pd.DataFrame) -> pd.Series:
     return df.loc[df["Age"].idxmax()]
 
+def survival_rate(subset: pd.Series, df: pd.DataFrame) -> float:
+    """
+    Returns the percentage of people that survived from a given subset.
+    
+    Parameters:
+        subset (pd.Series): A boolean Series indicating the subset of passengers.
+        df (pd.DataFrame): The Titanic dataset.
+
+    Returns:
+        float: Percentage of survivors in the subset.
+    """
+    passengers = df[subset]
+
+    totalPassengers = passengers.shape[0]
+
+    passengersSurvived = passengers["Survived"].sum()
+
+    return (passengersSurvived / totalPassengers) * 100
+
