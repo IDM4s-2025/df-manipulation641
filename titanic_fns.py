@@ -32,3 +32,51 @@ def percentage_survivors_over_60(df: pd.DataFrame) -> float:
     total_over_60 = df[df["Age"] > 60].shape[0]
     num_survivors = count_survivors_over_60(df)
     return (num_survivors / total_over_60) * 100 if total_over_60 > 0 else 0
+
+
+def survival_rates_by_gender_and_age(df: pd.DataFrame):
+    """Calcula la tasa de supervivencia para mujeres, hombres y niños (menores de 18)."""
+    women_survival_rate = df[df["Sex"] == "female"]["Survived"].mean() * 100
+    men_survival_rate = df[df["Sex"] == "male"]["Survived"].mean() * 100
+    children_survival_rate = df[df["Age"] < 18]["Survived"].mean() * 100
+
+    return {
+        "Women Survival Rate": women_survival_rate,
+        "Men Survival Rate": men_survival_rate,
+        "Children Survival Rate": children_survival_rate
+    }
+
+
+
+def survival_rate_subset(df: pd.DataFrame, subset: pd.Series) -> float:
+    """Calcula el porcentaje de personas que sobrevivieron dentro de un subconjunto dado como una serie booleana."""
+    subset_df = df[subset]  
+    if subset_df.shape[0] == 0:  
+        return 0
+    survival_rate = subset_df["Survived"].mean() * 100  
+    return survival_rate
+
+
+def median_age(df: pd.DataFrame) -> float:
+    """Calcula la edad mediana de los pasajeros."""
+    return df["Age"].median()
+
+
+def passengers_per_port(df: pd.DataFrame) -> pd.Series:
+    """Cuenta cuántos pasajeros embarcaron en cada puerto."""
+    return df["Embarked"].value_counts()
+
+def survival_rate_by_fare(df: pd.DataFrame, threshold: float) -> tuple:
+    """Calcula la tasa de supervivencia para pasajeros que pagaron más o menos que el umbral dado."""
+    high_fare = df["Fare"] > threshold
+    low_fare = df["Fare"] <= threshold
+
+    high_fare_survival = df[high_fare]["Survived"].mean() * 100 if df[high_fare].shape[0] > 0 else 0
+    low_fare_survival = df[low_fare]["Survived"].mean() * 100 if df[low_fare].shape[0] > 0 else 0
+
+    return high_fare_survival, low_fare_survival
+
+
+def survival_rate_by_port(df: pd.DataFrame) -> pd.Series:
+    """Calcula la tasa de supervivencia por puerto de embarque."""
+    return df.groupby("Embarked")["Survived"].mean() * 100
