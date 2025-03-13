@@ -77,13 +77,13 @@ def percentage(subset:pd.Series, survived: pd.Series)-> float:
     """Regresa el porcentaje de un subset
 
     Args:
-        subset (pd.DataFrame): subset
-        suevived (pd.DataFrame): bool si sobrevivieron o no.
+        subset (pd.Series): subset
+        suevived (pd.Series): bool si sobrevivieron o no.
 
     Returns:
-        int: Porcentaje
+        float: Porcentaje
     """
-    size_df = len(subset)
-    size_survived = len(survived)
-    return (size_survived/size_df)*100
+    survived_subset = survived[subset]
+    percentage = survived_subset.mean() * 100
+    return float(percentage)
 
